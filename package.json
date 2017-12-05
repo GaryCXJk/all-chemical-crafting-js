@@ -1,0 +1,18 @@
+{
+  "name": "all-chemical-crafting-js",
+  "version": "1.0.0",
+  "description": "A simple crafting system",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "GaryCXJk",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GaryCXJk/all-chemical-crafting-js.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}
