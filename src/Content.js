@@ -1,4 +1,4 @@
-import { packInteger } from './Global'
+import * as Global from './Global'
 
 /**
  * Content defines something that can be placed in a recipe.
@@ -54,16 +54,16 @@ class Content {
 
     dumpData() {
         let data = ''
-        data+= packInteger(this.id)
-        data+= packInteger(this.name.length + 1, 1)
-        data+= this.name
-        data+= packInteger(0, 1)
-        data+= packInteger(this.realName.length + 1, 1)
-        data+= this.realName
-        data+= packInteger(0, 1)
-        data+= packInteger(this.description.length + 1, 1)
-        data+= this.description
-        data+= packInteger(0, 1)
+        let name = Global.packString(this.name)
+        let realName = Global.packString(this.realName)
+        let description = Global.packString(this.description)
+        data+= Global.packInteger(this.id)
+        data+= Global.packInteger(name.length, 1)
+        data+= name
+        data+= Global.packInteger(realName.length, 1)
+        data+= realName
+        data+= Global.packInteger(description.length, 1)
+        data+= description
         return data
     }
 }

@@ -1,9 +1,11 @@
 import Content from './Content'
-import { packInteger } from './Global'
+import * as Global from './Global'
 
 let idMap = {}
 let nameMap = {}
 let groupList = []
+
+let groupId = 1
 
 function GroupParseException(message) {
     this.message = message
@@ -65,19 +67,22 @@ class Group extends Content {
     dumpData() {
         let parent = this.parent
         let data = super.dumpData()
-        data+= this.packInteger(this.color, 3, true)
-        data+= this.packInteger(parent === null ? 0 : 1, 1)
+        data+= Global.packInteger(this.color, 3, true)
+        data+= Global.packInteger(parent === null ? 0 : 1, 1)
         if(parent !== null) {
-            data+= this.packInteger(parent.id)
+            data+= Global.packInteger(parent.id)
         }
         return data
     }
 
-    static add(id, name, properties) {
-        let realName = properties.realName || name
+    static add(name, realName = null, properties = {}) {
+        let id = groupId++
         let description = properties.description || ''
         let color = properties.color || 0x555555
         let parent = properties.parent || null
+        if(!realName) {
+            realName = name
+        }
         let group = new Group(id, name, realName, description, color)
         group.parent = parent
     }
@@ -98,20 +103,20 @@ class Group extends Content {
 
     static dumpFullData() {
         let data = 'GRP'
-        data+= packInteger(0, 1)
-        let subData = packInteger(groupList.length)
+        data+= Global.packInteger(0, 1)
+        let subData = Global.packInteger(groupList.length)
         groupList.forEach(group => {
             let groupData = group.dumpData()
-            subData+= packInteger(groupData.length)
+            subData+= Global.packInteger(groupData.length)
             subData+= groupData
         })
-        data+= packInteger(subData.length)
+        data+= Global.packInteger(subData.length)
         data+= subData
         return data
     }
 
     static parseData(data) {
-        if(!data.slice(0, 4) !== 'GRP' + packInteger(0, 1)) {
+        if(!data.slice(0, 4) !== 'GRP' + Global.packInteger(0, 1)) {
             throw new GroupParseException('No valid group data - Header mismatch')
         }
         let subDataSize = data.slice(4, 8)
