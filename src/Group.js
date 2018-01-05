@@ -1,11 +1,11 @@
 import Content from './Content'
 import * as Global from './Global'
 
-let idMap = {}
-let nameMap = {}
-let groupList = []
+const idMap = {}
+const nameMap = {}
+const groupList = []
 
-let groupId = 1
+const groupId = 1
 
 function GroupParseException(message) {
     this.message = message
@@ -76,10 +76,18 @@ class Group extends Content {
     }
 
     static add(name, realName = null, properties = {}) {
-        let id = groupId++
+        let id
         let description = properties.description || ''
         let color = properties.color || 0x555555
         let parent = properties.parent || null
+        if(properties.id) {
+            id = properties.id
+        } else {
+            id = groupId++
+            while(idMap.hasOwnProperty(id)) {
+                id = groupId++
+            }
+        }
         if(!realName) {
             realName = name
         }
