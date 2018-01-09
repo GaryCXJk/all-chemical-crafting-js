@@ -93,6 +93,7 @@ class Group extends Content {
         }
         let group = new Group(id, name, realName, description, color)
         group.parent = parent
+        return group
     }
 
     static get(identifier) {
@@ -110,8 +111,7 @@ class Group extends Content {
     }
 
     static dumpFullData() {
-        let data = 'GRP'
-        data+= Global.packInteger(0, 1)
+        let data = Global.packString('GRP')
         let subData = Global.packInteger(groupList.length)
         groupList.forEach(group => {
             let groupData = group.dumpData()
@@ -124,7 +124,7 @@ class Group extends Content {
     }
 
     static parseData(data) {
-        if(!data.slice(0, 4) !== 'GRP' + Global.packInteger(0, 1)) {
+        if(!Global.unpackString(data.slice(0, 4)) !== 'GRP') {
             throw new GroupParseException('No valid group data - Header mismatch')
         }
         let subDataSize = data.slice(4, 8)
