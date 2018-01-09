@@ -5,9 +5,14 @@ const idMap = {}
 const nameMap = {}
 const groupList = []
 
-const groupId = 1
+let groupId = 1
 
-function GroupParseException(message) {
+export function GroupException(message) {
+    this.message = message
+    this.name = 'GroupException'
+}
+
+export function GroupParseException(message) {
     this.message = message
     this.name = 'GroupParseException'
 }
@@ -65,7 +70,7 @@ class Group extends Content {
     }
 
     dumpData() {
-        let parent = this.parent
+        let parent = this._parent
         let data = super.dumpData()
         data+= Global.packInteger(this.color, 3, true)
         data+= Global.packInteger(parent === null ? 0 : 1, 1)
@@ -76,6 +81,9 @@ class Group extends Content {
     }
 
     static add(name, realName = null, properties = {}) {
+        if(nameMap[name]) {
+            throw new GroupException('Group already defined')
+        }
         let id
         let description = properties.description || ''
         let color = properties.color || 0x555555

@@ -5,9 +5,14 @@ const idMap = {}
 const nameMap = {}
 const attributeList = []
 
-const attributeId = 1
+let attributeId = 1
 
-function AttributeParseException(message) {
+export function AttributeException(message) {
+    this.message = message
+    this.name = 'AttributeException'
+}
+
+export function AttributeParseException(message) {
     this.message = message
     this.name = 'AttributeParseException'
 }
@@ -26,6 +31,9 @@ class Attribute extends Content {
     }
     
     static add(name, realName = null, properties = {}) {
+        if(nameMap[name]) {
+            throw new AttributeException('Attribute already defined')
+        }
         let id
         let description = properties.description || ''
         if(properties.id) {
@@ -68,5 +76,6 @@ class Attribute extends Content {
         data+= subData
         return data
     }
-
 }
+
+export default Attribute
