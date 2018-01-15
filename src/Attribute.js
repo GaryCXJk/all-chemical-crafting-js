@@ -17,7 +17,7 @@ export function AttributeParseException(message) {
     this.name = 'AttributeParseException'
 }
 
-class Attribute extends Content {
+export default class Attribute extends Content {
     constructor(id, name, realName, description) {
         super()
         this._id = id
@@ -77,5 +77,3 @@ class Attribute extends Content {
         return data
     }
 }
-
-export default Attribute

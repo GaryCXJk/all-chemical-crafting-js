@@ -22,7 +22,7 @@ export function ComponentParseException(message) {
     this.name = 'ComponentParseException'
 }
 
-class Component extends Content {
+export default class Component extends Content {
     constructor(id, name, realName, description, group) {
         super()
         this._id = id
@@ -187,5 +187,3 @@ class Component extends Content {
     }
 
 }
-
-export default Component

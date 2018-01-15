@@ -17,7 +17,7 @@ export function GroupParseException(message) {
     this.name = 'GroupParseException'
 }
 
-class Group extends Content {
+export default class Group extends Content {
     constructor(id, name, realName, description, color = 0x555555) {
         super()
         this._id = id
@@ -140,5 +140,3 @@ class Group extends Content {
         let groupListLength = subData.slice(0, 4)
     }
 }
-
-export default Group

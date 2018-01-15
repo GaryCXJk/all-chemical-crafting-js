@@ -3,7 +3,7 @@ import * as Global from './Global'
 /**
  * Content defines something that can be placed in a recipe.
  */
-class Content {
+export default class Content {
     /**
      * 
      */
@@ -67,5 +67,3 @@ class Content {
         return data
     }
 }
-
-export default Content
