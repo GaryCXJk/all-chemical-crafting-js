@@ -108,7 +108,7 @@ test('Component => has four entries', () => {
 test('Component => adding component without group causes error', () => {
   expect(() => {
     Component.add('stone', 'Stone');
-  }).toThrow();
+  }).toThrow(ComponentException);
 });
 
 test('Component => adding component after setting a group won\'t cause error', () => {
