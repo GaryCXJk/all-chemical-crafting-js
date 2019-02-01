@@ -27,7 +27,7 @@ export default class Group extends Content {
     this.order = 1;
     this.color = color;
     this._parent = null; // eslint-disable-line no-underscore-dangle
-    this.children = [];
+    this._children = []; // eslint-disable-line no-underscore-dangle
     idMap[+id] = this;
     nameMap[name] = this;
     groupList.push(this);
@@ -61,13 +61,15 @@ export default class Group extends Content {
   }
 
   get children() {
-    return this.children.slice(0);
+    return this._children.slice(0); // eslint-disable-line no-underscore-dangle
   }
 
   addChild(group) {
-    if (this.children.indexOf(group) === -1) {
-      this.children.push(group);
+    /* eslint-disable no-underscore-dangle */
+    if (this._children.indexOf(group) === -1) {
+      this._children.push(group);
     }
+    /* eslint-enable no-underscore-dangle */
   }
 
   dumpData() {

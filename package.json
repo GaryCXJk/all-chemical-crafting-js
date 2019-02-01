@@ -13,15 +13,14 @@
     "url": "git://github.com/GaryCXJk/all-chemical-crafting-js.git"
   },
   "license": "MIT",
-  "dependencies": {
-    "eslint-plugin-import": "^2.16.0"
-  },
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
     "babel-cli": "^6.26.0",
     "babel-jest": "^24.0.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-preset-env": "^2.0.0-alpha.20",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "jest": "^24.0.0"
   }
 }
